@@ -5,26 +5,41 @@ Created on Fri Feb  7 23:02:53 2020
 @author: jrslagle
 """
 
+import sys
 from selenium import webdriver # is chromedriver in my path?
-#from selenium.webdriver.support import expected_conditions as EC
-#from selenium.webdriver.common.by import By
-#from selenium.webdriver.support.ui import WebDriverWait WebDriverWait(driver, 10).until(EC.title_contains("home"))
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome()
 
 def main():
-    site_login(username="account1", password="account1")
-#    save_html("afterlogin_html.txt")
-    print("Yay, we logged in!")
+    username, password = ('account1', 'account1')
+    try:    
+        happy_path(username, password)
+        print("[PASS] Simple login successful.")
+    except:
+        print("Exception:", sys.exc_info()[1])
+        print("[FAIL] Simple login failed.")
+        driver.quit()
 
 def site_login(username,password):
     driver.get ("https://rubixdesign.printercloud.com/admin/")
     driver.find_element_by_id("relogin_user").send_keys(username)
     driver.find_element_by_id("relogin_password").send_keys(password)
     driver.find_element_by_id("admin-login-btn").click()
+    
+def happy_path(username, password):
+    
+    site_login(username, password)
 
-def save_html(filename):
-    with open(filename,'w', encoding="utf-8") as f:
-        f.write(driver.page_source)
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, find_text(username)))
+    ).click()
+    
+    driver.find_element_by_xpath(find_text("Log Out")).click()
+        
+def find_text(text):
+    return "//*[contains(text(), '"+text+"')]"
 
 main()
