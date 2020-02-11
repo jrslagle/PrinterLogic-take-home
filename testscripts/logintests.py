@@ -114,12 +114,14 @@ class LoginTests(object):
             if run_alone:    
                 print("[PASS] Simple login and logout successful.")
                 self.driver.quit()
-            else: return True
+            else:
+                return True
         else:
             if run_alone:
                 print("[FAIL] Simple login failed.")
                 self.driver.quit()
-            else: return False
+            else:
+                return False
     
     def bad_login(self, a_username = None, a_password = None):
         self.site_login(a_username, a_password)
@@ -176,25 +178,16 @@ class LoginTests(object):
     
     def site_login(self, a_username, a_password):
         try:
-#            print("Before finding username field")
             username_field = self.driver.find_element_by_id("relogin_user")
-#            print("Before clearing username field")            
-#            print(username_field)
             username_field.clear()
-#            print("Before checking if username is None")
-#            print(username_field)
             if a_username != None:
-#                print("Before typing username in field")
-#                print(username_field)
                 username_field.send_keys(a_username)
     
-#            print("Before password field")
             password_field = self.driver.find_element_by_id("relogin_password")
             password_field.clear()
             if a_password != None:
                 password_field.send_keys(a_password)
     
-#            print("Before login button")
             self.driver.find_element_by_id("admin-login-btn").click()
             
         except NoSuchElementException:
@@ -258,5 +251,4 @@ def find_text(text):
 
 # TODO:
 # write a reliable is_logged_out() method.
-# convert test-login to a class with driver, true_username, and true_password as instance variables.
 # run whole login test suite in parallel and see if that's faster.
