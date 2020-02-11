@@ -11,3 +11,5 @@ pip install selenium
 A WebDriver such as ChromeDriver:
 https://sites.google.com/a/chromium.org/chromedriver/
 (I installed chromium-chromedriver through the Synaptic Package Manager in Linux)
+
+To run, simply run test_engine.py in the main folder.
