@@ -8,9 +8,9 @@ from testscripts.logintests import LoginTests
 
 login_test_suite = LoginTests('account1','account1')
 
-print("Running whole test suite")
+#print("Running whole test suite")
 login_test_suite.run_tests()
 
-print("Testing just the happy path without arguments")
-login_test_suite.happy_path()
+#print("Testing just the happy path without arguments")
+#login_test_suite.happy_path()
 
