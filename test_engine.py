@@ -6,7 +6,7 @@ Created on Mon Feb 10 22:45:19 2020
 """
 from testscripts.logintests import LoginTests
 
-login_test_suite = LoginTests('account1','account1')
+login_test_suite = LoginTests('jrslagle','or132904')
 
 print("Running whole test suite")
 login_test_suite.run_tests()

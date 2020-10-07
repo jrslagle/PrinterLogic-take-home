@@ -19,10 +19,11 @@ class LoginTests(object):
     def __init__(self, a_username, a_password):
         self.true_username = a_username
         self.true_password = a_password
+        self.true_url = 'https://rubixdesigns.printercloud.com/admin/'
 
     def run_tests(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("https://rubixdesign.printercloud.com/admin/")
+        self.driver.get(self.true_url)
         all_passing = True
         
         # Happy path test
@@ -106,7 +107,7 @@ class LoginTests(object):
         # if running alone, a new web driver is needed
         if run_alone:
             self.driver = webdriver.Chrome()
-            self.driver.get("https://rubixdesign.printercloud.com/admin/")
+            self.driver.get(self.true_url)
             
         self.site_login(a_username, a_password)
         if self.is_logged_in():
